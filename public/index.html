@@ -1,0 +1,26 @@
+<head>
+    <title>My A-Frame Scene</title>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+  </head>
+  
+  <body>
+    <a-scene fog="type: exponential; color: #ecf0f1; density: 0.025">
+
+        <a-sky  id="sky"
+                radius="500"
+                color="#34495e"
+        ></a-sky>
+
+        <a-box  position="0 1 -4"
+                color="#e74c3c"
+                material="shader: flat"
+                height="1"
+                width="1"
+                depth="1"
+                event-set__click="material.color: #c0392b; scale: 2 2 2"
+                event-set__mouseenter="material.color: blue"
+        ></a-box>
+      <a-camera><a-cursor></a-cursor></a-camera>
+    </a-scene>
+  </body>
