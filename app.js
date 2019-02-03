@@ -1,6 +1,3 @@
-require('aframe');
-require('aframe-event-set-component');
-
 //app setup
 const express   = require('express');
 const app       = express();

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+<meta charset="utf-8">
+<title>Staesys</title>
+</head>
+
+<body>
+	<header>
+	</header>
+    <a-scene>
+  <a-assets>
+  	<img id="sky" src="assets/Sky.png">
+  	</a-assets>
+  <!-- Camera and Cursor -->
+  <a-camera look-controls>
+     <a-cursor color="#878787"></a-cursor>
+  	</a-camera>
+  <a-entity id="box" cursor-listener geometry="primitive: box" material="color: #12171C;"></a-entity>
+  
+  <!-- Ground and Sky -->
+  <a-plane material="shader: flat; src:http://jkunzart.com/wp-content/uploads/galleries/post-206/full/GN_GrassB.jpg;" position="0 0 -4" rotation="-90 0 0" width="100" height="100" color="#12171C"></a-plane>
+  <a-sky src="#sky" geometry="primitive: sphere; radius: 30; phiLength: 360; thetaLength: 90"></a-sky>  
+  <!--Lights-->
+  <a-light type ="hemisphere" color="orange" intensity="1.5" position="-1 2.12 0.57"></a-light>
+  <!-- Scene Objects -->
+  	<!--Icosahedron-->
+  <a-icosahedron position="-15 25 5" color="#FF926B" radius="5" material="shader:flat"></a-icosahedron>
+   	<!--Cube-->
+  <a-box color="#f39c12" position="4.5 0.50 4.5">
+        <!--color-->
+        <a-animation attribute="color" begin="mouseenter" dur="1000" from="#f39c12" to="#e74c3c"></a-animation>
+        <a-animation attribute="color" begin="mouseleave" dur="1000" from="#e74c3c" to="#f39c12"></a-animation>
+        <!--scale-->
+        <a-animation attribute="scale" begin="mouseenter" dur="1000" from="1 1 1" to="1.2 1.2 1.2"></a-animation>
+        <a-animation attribute="scale" begin="mouseleave" dur="1000" from="1.2 1.2 1.2" to="1 1 1"></a-animation>
+        <!--rotation-->
+        <a-animation attribute="rotation" begin="mouseenter" dur="1000" from="1 1 1" to="1 180 1"></a-animation>
+        <a-animation attribute="rotation" begin="mouseleave" dur="1000" from="1 180 1" to="1 1 1"></a-animation>
+      </a-box>
+</a-scene>
+
+</body>
+</html>

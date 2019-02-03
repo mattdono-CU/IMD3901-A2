@@ -1,26 +1,64 @@
 <head>
     <title>My A-Frame Scene</title>
-    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="/js/aframe.min.js"></script>
   </head>
   
   <body>
-    <a-scene fog="type: exponential; color: #ecf0f1; density: 0.025">
+    <a-scene fog="type: exponential; color: #261C15; density: 0.0015">
+      <a-assets>
+        <a-mixin  id="mBubble"
+                  geometry="primitive: sphere; radius: 0.4"
+                  material="color: #e74c3c; metalness: 1; transparent: true; opacity: 0.8; emissive: #F1FAEE; emissiveIntensity: 0.4; fog: true"
+        ></a-mixin>
+        
+        <a-mixin  id="mButton"
+                  geometry="primitive: cylinder; radius: 0.1; height: 0.1"
+                  material="color: #e74c3c; metalness: 0.4; roughness: 0.6"
+                  position="0 0.8 0"
+        ></a-mixin>
+        
+        <a-mixin  id="mPedestal"
+                  geometry="primitive: box; height: 0.8; width: 0.4; depth: 0.4"
+                  material="color: #bdc3c7; metalness: 0.2; roughness: 0.8"
+                  position="0 0.4 0"
+        ></a-mixin>
+      </a-assets>
 
-        <a-sky  id="sky"
-                radius="500"
-                color="#34495e"
-        ></a-sky>
 
-        <a-box  position="0 1 -4"
-                color="#e74c3c"
-                material="shader: flat"
-                height="1"
-                width="1"
-                depth="1"
-                event-set__click="material.color: #c0392b; scale: 2 2 2"
-                event-set__mouseenter="material.color: blue"
-        ></a-box>
-      <a-camera><a-cursor></a-cursor></a-camera>
+      <!-- Camera -->
+      <a-entity camera look-controls wasd-controls position="0 1.8 0">
+        <a-entity cursor="fuse: false; fuseTimeout: ; rayOrigin: mouse"
+                  position="0 0 -1"
+                  material="color: #bdc3c7; shader: flat">
+        </a-entity>
+      </a-entity>
+      
+      <!-- Sky -->
+      <a-sky  id="sky"
+              radius="500"
+              color="#1D3557"
+      ></a-sky>
+
+      <!-- Light -->
+
+      <!--Ground-->
+      <a-plane  id="ground"
+                rotation="-90 0 0"
+                position="0 0 -0.5"
+                height="3"
+                width="1.5"
+                color="#7f8c8d"
+      ></a-plane>
+
+      <!-- Bubble Button -->
+      <a-entity position ="0 0 -1.5">
+        <a-entity mixin="mButton">
+          <a-animation attribute="position" from="0 0.8 0" to="0 0.76 0" dur="200" direction="alternate" easing="ease-circ" begin="mousedown" repeat="1"></a-animation>
+        </a-entity>
+        <a-entity mixin="mPedestal"></a-entity>
+      </a-entity>
+
+      <!--Bubble-->
+      <a-entity mixin="mBubble" position="0 1.5 -4"></a-entity>
     </a-scene>
   </body>
