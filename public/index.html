@@ -4,17 +4,29 @@
   </head>
   
   <body>
-    <a-scene fog="type: exponential; color: #261C15; density: 0.0015">
+    <!--<a-scene fog="type: exponential; color: #261C15; density: 0.0015">-->
+    <a-scene>
       <a-assets>
+        <a-asset-item id="tower-obj" src="/assets/pipeTower.obj"></a-asset-item>
+        <a-asset-item id="tower-mtl" src="/assets/towerDiffuse.png"></a-asset-item>
+        
+        <!-- Sounds sourced from: http://noproblo.dayjo.org/ZeldaSounds/ -->
+        <audio id="buttonTrue" src="/assets/sounds/OOT_MiniMap_On.wav"></audio>
+        <audio id="buttonFalse" src="/assets/sounds/OOT_MiniMap_Off.wav"></audio>
+        <audio id="bubblePop" src="/assets/sounds/OOT_Shabom_Pop.wav"></audio>
+
         <a-mixin  id="mBubble"
                   geometry="primitive: sphere; radius: 0.4"
                   material="color: #e74c3c; metalness: 1; transparent: true; opacity: 0.8; emissive: #F1FAEE; emissiveIntensity: 0.4; fog: true"
+                  light="type: point; intensity: 0.8; distance: 50; decay: 2"
+                  sound="src: #bubblePop; on: click"
         ></a-mixin>
         
         <a-mixin  id="mButton"
                   geometry="primitive: cylinder; radius: 0.1; height: 0.1"
                   material="color: #e74c3c; metalness: 0.4; roughness: 0.6"
                   position="0 0.8 0"
+                  sound="src: #buttonTrue; on: click"
         ></a-mixin>
         
         <a-mixin  id="mPedestal"
@@ -39,9 +51,18 @@
               color="#1D3557"
       ></a-sky>
 
-      <!-- Light -->
+      <!-- Lights -->
+      <a-entity id="ambientLight"
+                light="type: ambient; color: #EEE; intensity: 0.8"
+      ></a-entity>
+      <a-entity id="skyLight"
+                light="type: spot; angle: 180; color: #EEE; intensity: 1; decay: 2; distance: 100"
+                position="0 20 0"></a-entity>
 
-      <!--Ground-->
+      <!-- Pipe Tower -->  
+      <!-- <a-entity obj-model="obj: #tower-obj" material="src: #tower-mtl" scale=" 0.01 0.01 0.01"></a-entity> -->
+
+      <!-- Player Platform -->
       <a-plane  id="ground"
                 rotation="-90 0 0"
                 position="0 0 -0.5"
@@ -53,12 +74,19 @@
       <!-- Bubble Button -->
       <a-entity position ="0 0 -1.5">
         <a-entity mixin="mButton">
-          <a-animation attribute="position" from="0 0.8 0" to="0 0.76 0" dur="200" direction="alternate" easing="ease-circ" begin="mousedown" repeat="1"></a-animation>
+          <a-animation  attribute="position"
+                        from="0 0.8 0" to="0 0.76 0"
+                        dur="150"
+                        direction="alternate"
+                        easing="ease-circ"
+                        begin="mousedown"
+                        repeat="1"
+          ></a-animation>
         </a-entity>
         <a-entity mixin="mPedestal"></a-entity>
       </a-entity>
 
       <!--Bubble-->
-      <a-entity mixin="mBubble" position="0 1.5 -4"></a-entity>
+      <!--<a-entity mixin="mBubble" position="0 1.5 -10"></a-entity>-->
     </a-scene>
   </body>
