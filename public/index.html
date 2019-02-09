@@ -1,47 +1,50 @@
 <head>
     <title>My A-Frame Scene</title>
-    <script src="/js/aframe.min.js"></script>
+    <script src="js/aframe.min.js"></script>
+    <script src="js/new-bubble.js"></script>
+    <script src="js/pop-bubble.js"></script>
   </head>
   
   <body>
-    <!--<a-scene fog="type: exponential; color: #261C15; density: 0.0015">-->
-    <a-scene>
-      <a-assets>
-        <a-asset-item id="tower-obj" src="/assets/pipeTower.obj"></a-asset-item>
-        <a-asset-item id="tower-mtl" src="/assets/towerDiffuse.png"></a-asset-item>
-        
+    <a-scene id="scene" pool__bubbles="container: #bubbleBox; mixin: mBubble; size: 10;">
+      <a-assets>        
         <!-- Sounds sourced from: http://noproblo.dayjo.org/ZeldaSounds/ -->
         <audio id="buttonTrue" src="/assets/sounds/OOT_MiniMap_On.wav"></audio>
         <audio id="buttonFalse" src="/assets/sounds/OOT_MiniMap_Off.wav"></audio>
         <audio id="bubblePop" src="/assets/sounds/OOT_Shabom_Pop.wav"></audio>
 
         <a-mixin  id="mBubble"
-                  geometry="primitive: sphere; radius: 0.4"
+                  geometry="primitive: sphere; radius: 0.4;"
                   material="color: #e74c3c; metalness: 1; transparent: true; opacity: 0.8; emissive: #F1FAEE; emissiveIntensity: 0.4; fog: true"
-                  light="type: point; intensity: 0.8; distance: 50; decay: 2"
-                  sound="src: #bubblePop; on: click"
+                  light="type: point; intensity: 0.8; distance: 50; decay: 2;"
+                  sound="src: #bubblePop; on: click;"
+                  position="0 0.5 -2"
         ></a-mixin>
         
         <a-mixin  id="mButton"
-                  geometry="primitive: cylinder; radius: 0.1; height: 0.1"
-                  material="color: #e74c3c; metalness: 0.4; roughness: 0.6"
+                  new-bubble
+                  geometry="primitive: cylinder; radius: 0.1; height: 0.1;"
+                  material="color: #e74c3c; metalness: 0.4; roughness: 0.6;"
                   position="0 0.8 0"
-                  sound="src: #buttonTrue; on: click"
         ></a-mixin>
         
         <a-mixin  id="mPedestal"
-                  geometry="primitive: box; height: 0.8; width: 0.4; depth: 0.4"
-                  material="color: #bdc3c7; metalness: 0.2; roughness: 0.8"
+                  geometry="primitive: box; height: 0.8; width: 0.4; depth: 0.4;"
+                  material="color: #bdc3c7; metalness: 0.2; roughness: 0.8;"
                   position="0 0.4 0"
         ></a-mixin>
       </a-assets>
 
+      <!-- Game Sounds -->
+      <a-entity id="button-true" sound="src:#buttonTrue"></a-entity>
+      <a-entity id="button-false" sound="src:#buttonFalse"></a-entity>
+      <a-entity id="bubble-pop" sound="src:#bubblePop"></a-entity>
 
       <!-- Camera -->
       <a-entity camera look-controls wasd-controls position="0 1.8 0">
-        <a-entity cursor="fuse: false; fuseTimeout: ; rayOrigin: mouse"
+        <a-entity cursor="fuse: false; fuseTimeout: ; rayOrigin: mouse;"
                   position="0 0 -1"
-                  material="color: #bdc3c7; shader: flat">
+                  material="color: #bdc3c7; shader: flat;">
         </a-entity>
       </a-entity>
       
@@ -53,14 +56,8 @@
 
       <!-- Lights -->
       <a-entity id="ambientLight"
-                light="type: ambient; color: #EEE; intensity: 0.8"
+                light="type: ambient; color: #EEE; intensity: 0.8;"
       ></a-entity>
-      <a-entity id="skyLight"
-                light="type: spot; angle: 180; color: #EEE; intensity: 1; decay: 2; distance: 100"
-                position="0 20 0"></a-entity>
-
-      <!-- Pipe Tower -->  
-      <!-- <a-entity obj-model="obj: #tower-obj" material="src: #tower-mtl" scale=" 0.01 0.01 0.01"></a-entity> -->
 
       <!-- Player Platform -->
       <a-plane  id="ground"
@@ -86,7 +83,9 @@
         <a-entity mixin="mPedestal"></a-entity>
       </a-entity>
 
-      <!--Bubble-->
-      <!--<a-entity mixin="mBubble" position="0 1.5 -10"></a-entity>-->
+      <!--Bubbles-->
+      <a-entity id="bubbleBox">
+        
+      </a-entity>
     </a-scene>
   </body>
