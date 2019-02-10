@@ -1,8 +1,8 @@
 {
-  "name": "IMD3901-A2",
+  "name": "imd3901-a2",
   "version": "1.0.0",
   "description": "Repo for Assignment 2 in Design Studio 3",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,15 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/mattdono-CU/IMD3901-A2.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Matthew Donoghue",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mattdono-CU/IMD3901-A2/issues"
   },
   "homepage": "https://github.com/mattdono-CU/IMD3901-A2#readme",
   "dependencies": {
-    "aframe-event-set-component": "^4.1.2",
+    "aframe-physics-system": "^3.3.0",
     "express": "^4.16.4"
   }
 }
