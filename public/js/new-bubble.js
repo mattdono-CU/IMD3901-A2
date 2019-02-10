@@ -8,6 +8,7 @@ AFRAME.registerComponent('new-bubble', {
         
         Context_AF.soundElA = document.querySelector('#button-true');
         Context_AF.soundElB = document.querySelector('#button-false');
+        Context_AF.soundElC = document.querySelector('#button-false');
 
         Context_AF.el.addEventListener('click', function(event) {
             console.log("<BUTTON>");
@@ -33,6 +34,7 @@ AFRAME.registerComponent('new-bubble', {
         
         bubbleEl.setAttribute('mixin', 'mBubble');
         bubbleEl.setAttribute('position', {x: 0, y: 2, z: -4});
+        //bubbleEl.setAttribute('material', {color:});
         
         let container = document.querySelector('#bubbleBin');
         container.appendChild(bubbleEl);       
