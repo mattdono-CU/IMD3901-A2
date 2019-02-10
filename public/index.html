@@ -7,7 +7,7 @@
   </head>
   
   <body>
-    <a-scene shadow="type: basic" physics="debug: false; gravity: 0; restitution: 0.5">
+    <a-scene shadow="type: pcfsoft" physics="debug: false; gravity: 0; restitution: 0.5">
       <a-assets>        
         <!-- Sounds sourced from: http://noproblo.dayjo.org/ZeldaSounds/ -->
         <audio id="buttonTrue" src="/assets/sounds/OOT_MiniMap_On.wav"></audio>
@@ -20,7 +20,8 @@
                   dynamic-body
                   geometry="primitive: sphere; radius: 0.4;"
                   material="color: #f1faee; metalness: 1; transparent: true; opacity: 0.8; emissive: #F1FAEE; emissiveIntensity: 0.4;"
-                 sound="src: #bubbleBounce; on: collide;"
+                  shadow="cast: true; receive; true"
+                  sound="src: #bubbleBounce; on: collide;"
         ></a-mixin>
         
         <a-mixin  id="mButton"
@@ -28,6 +29,7 @@
                   static-body
                   geometry="primitive: cylinder; radius: 0.1; height: 0.1;"
                   material="color: #e74c3c; metalness: 0.4; roughness: 0.6;"
+                  shadow="cast: true; receive; true"
                   position="0 0.8 0"
         ></a-mixin>
         
@@ -35,19 +37,37 @@
                   static-body
                   geometry="primitive: box; height: 0.8; width: 0.4; depth: 0.4;"
                   material="color: #bdc3c7; metalness: 0.2; roughness: 0.8;"
+                  shadow="cast: true; receive; true"
                   position="0 0.4 0"
         ></a-mixin>
           
         <a-mixin  id="mPlane"
                   static-body
-                  geometry="primitive: box; height: 0.01; width: 10; depth: 20;"
-                  material="side: both; color: #028090;"
+                  geometry="primitive: box; height: 0.01; width: 5; depth: 10;"
+                  material="side: both; roughness: 0.8; metalness: 0.2;"
+                  shadow="cast: false; receive: true;"
         ></a-mixin>
           
         <a-entity id="button-true" sound="src:#buttonTrue"></a-entity>
         <a-entity id="button-false" sound="src:#buttonFalse"></a-entity>
         <a-entity id="bubble-pop" sound="src:#bubblePop"></a-entity>
       </a-assets>
+        
+      <!-- Lights -->
+      <a-entity light="type: ambient; intensity: 0.7;"></a-entity>
+      <a-entity light="type: directional;
+                       intensity: 0.3;
+                       shadowCameraTop: 6;
+                       shadowCameraBottom: -6;
+                       shadowCameraLeft: -6;
+                       shadowCameraRight: 6;
+                       shadowMapHeight: 512;
+                       shadowMapWidth: 512;
+                       shadowCameraVisible: false;
+                       target: #buttonConsole;
+                       castShadow: true;"
+                       position="0 5 5"
+      ></a-entity>
         
       <!-- Camera -->
       <a-entity camera look-controls position="0 1.8 0">
@@ -69,44 +89,47 @@
       <a-entity>
          <!--walls-->
          <a-entity  mixin="mPlane"
-                    position="-10 5 0"
+                    position="-5 2.5 0"
                     rotation="0 0 90 "
-                    material="color"
+                    material="color: #95a5a6;"
          ></a-entity>
          <a-entity  mixin="mPlane"
-                    position="10 5 0"
+                    position="5 2.5 0"
                     rotation="0 0 90"
+                    material="color: #95a5a6;"
          ></a-entity>
          <a-entity  mixin="mPlane"
-                    position="0 5 -10"
+                    position="0 2.5 -5"
                     rotation="0 90 90"
+                    material="color: #bdc3c7;"
          ></a-entity>
          <a-entity  mixin="mPlane"
-                    position="0 5 10"
+                    position="0 2.5 5"
                     rotation="0 90 90"
+                    material="color: #bdc3c7;"
          ></a-entity>
          <!--floor-->
          <a-entity  mixin="mPlane"
-                    position="5 0 0"
-                    material="side: both; color: #05668d"
+                    position="2.5 0 0"
+                    material="color: #7f8c8d;"
          ></a-entity>
          <a-entity  mixin="mPlane"
-                    position="-5 0 0"
-                    material="side: both; color: #05668d"
+                    position="-2.5 0 0"
+                    material="color: #7f8c8d;"
          ></a-entity>
          <!--ceiling-->
          <a-entity  mixin="mPlane"
-                    position="5 10 0"
-                    material="side: both; color: #05668d"
+                    position="2.5 5 0"
+                    material="color: #ecf0f1;"
          ></a-entity>
          <a-entity  mixin="mPlane"
-                    position="-5 10 0"
-                    material="side: both; color: #05668d"
+                    position="-2.5 5 0"
+                    material="color: #ecf0f1;"
          ></a-entity>
       </a-entity>
 
       <!-- Bubble Button -->
-      <a-entity class="clickable" position ="0 0 -1.5">
+      <a-entity id="buttonConsole" class="clickable" position ="0 0 -1.5">
         <a-entity mixin="mButton">
           <a-animation  attribute="position"
                         from="0 0.8 0" to="0 0.76 0"
